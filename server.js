@@ -12,7 +12,7 @@ const app=express()
 app.use(express.json())
 app.use(cors({
   origin: 'http://localhost:4200',
-  origin:'http://localhost:50936',
+  origin:'http://localhost:53805',
   credentials: true
 }));app.use(cookieParser())
 await connectDB()
