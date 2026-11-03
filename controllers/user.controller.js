@@ -6,12 +6,7 @@ export const createuser=async(req,res,next)=>{
     try{
         const {name,email,age,phone,password,role}=req.body
 
-        if(!name || !email || !age || !phone || !password || !role){
-            return res.status(400).json({
-                message:"All Fields are required"
-            })
-        }
-
+       
         const emailexits=await User.findOne({email})
         if(emailexits){
             return res.status(400).json({

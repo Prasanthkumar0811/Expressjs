@@ -1,6 +1,7 @@
 import express from "express"
 import { authmiddle, authorize } from "../middleware/auth.middleware.js"
 import { createuser, deleteuser, getalluser, getmyprofile, getuserbyid, updateuser } from "../controllers/user.controller.js"
+import { createUserValidation } from "../middleware/user.validation.js"
 
 const userouter=express.Router()
 userouter.use(authmiddle)
@@ -11,7 +12,7 @@ userouter.get("/profile",getmyprofile)
 
 userouter.get("/getbyid/:id",authorize("admin","manager"),getuserbyid)
 
-userouter.post("/create",authorize("admin"),createuser)
+userouter.post("/create",authorize("admin"),createUserValidation,createuser)
 
 userouter.put("/update/:id",authorize("admin"),updateuser)
 
