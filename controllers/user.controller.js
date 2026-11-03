@@ -1,6 +1,7 @@
 import User from "../model/user.model.js"
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import AppError from "../utils/AppError.js";
 
 export const createuser=async(req,res,next)=>{
     try{
@@ -135,10 +136,7 @@ export const getuserbyid=async(req,res,next)=>{
         const  {id}=req.params
         const user=await User.findById(id).select("-password")
         if(!user){
-           const error=new Error('User not found')
-           error.statuscode=404
-
-           return next(error)
+           return next(new AppError('user not found',404))
         }
         return res.status(200).json({
             data:user
